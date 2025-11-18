@@ -34,8 +34,11 @@ import turtle
 
 def square(sideLength):
     '''Draws a square with a user-given side length.'''
+    # Loop 4 times to draw 4 sides of the square
     for num in range(4):
+        # Move forward by the side length
         turtle.forward(sideLength)
+        # Turn right 90 degrees to form a right angle corner
         turtle.right(90)
 
 # Note the use of dot notation, here taking the form:
@@ -62,15 +65,23 @@ def square(sideLength):
 
 def fractalTree(trunkLength):
     '''Draws a tree, recursively, given a trunk length.'''
+    # Base case: stop recursion if trunk is too short
     if trunkLength < 10:
         return
     else:
+        # Draw the current trunk forward
         turtle.forward(trunkLength)
+        # Turn left 45 degrees to draw left branch
         turtle.left(45)
+        # Recursively draw left subtree with half the trunk length
         fractalTree(trunkLength/2.0)
+        # Turn right 90 degrees (45 + 45) to draw right branch
         turtle.right(90)
+        # Recursively draw right subtree with half the trunk length
         fractalTree(trunkLength/2.0)
+        # Turn back left 45 degrees to return to original orientation
         turtle.left(45)
+        # Move backward to return to starting position
         turtle.backward(trunkLength)
 
 
@@ -78,7 +89,7 @@ def fractalTree(trunkLength):
 # you can enter the command 'turtle.left(90)'
 # before calling fractalTree().
 
-# Recommedned trunkLength = 300
+# Recommended trunkLength = 300
 
 # Restart shell after each use of turtle.
 
@@ -93,15 +104,17 @@ def fractalTree(trunkLength):
 # the form of a tuple as input.
 
 # Recall smallTree from Chap. 9 --
+# Tree structure: (node_name, left_subtree, right_subtree)
+# Empty subtrees are represented as ()
 
-smallTree = ('A',
-                 ('B',
-                      ('D', (), ()),
-                      ('E', (), ())
+smallTree = ('A',                              # Root node 'A'
+                 ('B',                         # Left child 'B'
+                      ('D', (), ()),          # Left leaf 'D'
+                      ('E', (), ())           # Right leaf 'E'
                   ),
-                 ('C',
-                      ('F', (), ()),
-                      ('G', (), ())
+                 ('C',                         # Right child 'C'
+                      ('F', (), ()),          # Left leaf 'F'
+                      ('G', (), ())           # Right leaf 'G'
                   )
              )
 
@@ -112,7 +125,7 @@ smallTree = ('A',
 # Your program should recognize the base case of
 # when the tree inhand is actually a leaf node.
 # If so, it should write the node's name using
-# trutle.write(x), where x is a string.
+# turtle.write(x), where x is a string.
 
 # In the recursive case drawPhyloTree(tree)
 # should draw branches.

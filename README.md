@@ -1,210 +1,353 @@
-# Phylogenetic Tree Utilities
+<div align="center">
 
-A collection of Python scripts for constructing, representing, drawing, and analyzing phylogenetic trees using recursive data structures and the `turtle` graphics library.
+# 🌳 Phylogenetic Tree Utilities
+
+**A powerful collection of Python scripts for constructing, representing, drawing, and analyzing phylogenetic trees**
+
+*Recursive data structures meet turtle graphics* 🐢
+
+[![Python](https://img.shields.io/badge/Python-3.7+-blue.svg)](https://www.python.org/downloads/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Status](https://img.shields.io/badge/Status-Active-brightgreen.svg)](https://github.com)
+
+</div>
 
 ---
 
-## Requirements
+## 📋 Table of Contents
 
-* **Python 3.x**
-* Standard library modules:
+- [✨ Features](#-features)
+- [🚀 Quick Start](#-quick-start)
+- [📦 Installation](#-installation)
+- [📚 Scripts Overview](#-scripts-overview)
+- [💡 Usage Tips](#-usage-tips)
+- [🤝 Contributing](#-contributing)
+- [📄 License](#-license)
 
-  * `turtle`
+---
 
-## Installation
+## ✨ Features
 
-1. Clone or download the repository containing these scripts.
-2. Ensure you have Python 3 installed and accessible via your command line.
-3. (Optional) Create and activate a virtual environment:
+- 🎨 **Visual Tree Drawing** - Draw phylogenetic trees with the `turtle` graphics library
+- 🔄 **Recursive Structures** - Elegant tuple-based tree representations
+- 📊 **Tree Analysis** - Comprehensive utilities for counting nodes, finding parents, and more
+- 🌿 **Fractal Trees** - Create beautiful fractal-style tree visualizations
+- ⚙️ **Scalable Drawing** - Support for scaled trees with configurable branch lengths
+- 🧮 **Tree Metrics** - Calculate height, count leaves, and traverse trees recursively
 
+---
+
+## 🚀 Quick Start
+
+```python
+# Draw a beautiful fractal tree
+import turtle
+from draw_trees import fractalTree
+
+turtle.left(90)
+fractalTree(300)
+turtle.done()
+```
+
+```python
+# Analyze a phylogenetic tree
+from represent_trees import leafCount, height, leafList
+
+tree = ('A', ('B', (), ()), ('C', (), ()))
+print(f"Leaves: {leafCount(tree)}")
+print(f"Height: {height(tree)}")
+print(f"Leaf names: {leafList(tree)}")
+```
+
+---
+
+## 📦 Installation
+
+### Requirements
+
+- **Python 3.7+** 🐍
+- Standard library modules:
+  - `turtle` 🐢
+
+### Setup Steps
+
+1. **Clone or download** this repository
    ```bash
-   python3 -m venv venv
-   source venv/bin/activate  # on Windows: venv\Scripts\activate
+   git clone <repository-url>
+   cd Phylogenetic_Tree_Builder
    ```
 
+2. **Verify Python installation**
+   ```bash
+   python --version  # Should be 3.7 or higher
+   ```
+
+3. **Create a virtual environment** (Recommended)
+   ```bash
+   python -m venv venv
+   
+   # Activate on Windows
+   venv\Scripts\activate
+   
+   # Activate on macOS/Linux
+   source venv/bin/activate
+   ```
+
+That's it! No external dependencies required. 🎉
+
 ---
 
-## Scripts Overview
+## 📚 Scripts Overview
 
-### 1. `draw_trees.py`
+### 🎨 1. `draw_trees.py`
+*Basic drawing utilities for trees and shapes*
 
-Provides basic drawing utilities for trees and shapes using the `turtle` module:
+Provides foundational drawing functions using the `turtle` module:
 
-* `square(sideLength)`: Draws a square with the specified side length.
-* `fractalTree(trunkLength)`: Recursively draws a fractal-style tree given an initial trunk length.
-* Template and starter code for `drawPhyloTree(Tree)`, which accepts a tree represented as a tuple.
+| Function | Description |
+|----------|-------------|
+| `square(sideLength)` | Draws a square with specified side length |
+| `fractalTree(trunkLength)` | Recursively draws a fractal-style tree |
 
-Usage example:
-
+**Example:**
 ```python
 import turtle
 from draw_trees import square, fractalTree
 
+# Draw a square
+square(250)
+
+# Draw an upright fractal tree
 turtle.left(90)
-fractalTree(300)  # Draws a fractal tree with trunk length 300
+fractalTree(300)
+turtle.done()
 ```
 
-### 2. `DrawTrees2.py`
+**💡 Tip:** Restart your Python shell (`Ctrl+F6` in many IDEs) after each turtle drawing session.
 
-An enhanced phylogenetic tree drawer with branch-length scaling and angle corrections:
+---
 
-* Defines constants `ANGLE` and `CORRECTION` for branch orientation.
-* `drawPhyloTree2(Tree, scale)`: Draws a phylogenetic tree where internal node values represent heights; branch lengths are scaled accordingly.
+### 🌿 2. `DrawTrees2.py`
+*Enhanced phylogenetic tree drawer with scaling*
 
-Usage example:
+An advanced tree drawer that uses internal node values to determine branch lengths:
 
+| Feature | Description |
+|---------|-------------|
+| `ANGLE` | Branch angle constant (default: 30°) |
+| `CORRECTION` | Distance correction factor (default: 1.155) |
+| `drawPhyloTree2(Tree, scale)` | Draws trees with scaled branch lengths |
+
+**Example:**
 ```python
 import turtle
 from DrawTrees2 import drawPhyloTree2, myTree
 
-# myTree is defined in the script, or supply your own\scale = 20
+scale = 20
 drawPhyloTree2(myTree, scale)
 turtle.done()
 ```
 
-### 3. `represent_trees.py`
-
-Functions for analyzing and manipulating tree data structures represented as nested tuples:
-
-* `leafCount(Tree)`: Returns the number of leaf nodes.
-* `find(node, Tree)`: Checks whether a node name/value exists in the tree.
-* `subtree(node, Tree)`: Returns the subtree rooted at the specified node.
-* `nodeList(Tree)`: Flattens the tree into a list of all nodes (internal and leaves).
-* `descendantNodes(node, Tree)`: Lists all descendant nodes of a given node.
-* `parent(node, Tree)`: Finds the parent of a given node, or `None` if it is the root.
-* `scale(Tree, scaleFactor)`: Multiplies internal node values by a scale factor, returning a new tree.
-
-Usage example:
-
+**Tree Format:**
 ```python
-from represent_trees import leafCount, find, subtree
-
-my_tree = ('A', ('B', (), ()), ('C', (), ()))
-print(leafCount(my_tree))  # Output: 2
-```
-
-### 4. `Phylogenetic_Tree_Builder.py`
-
-Basic tree metrics for tuple-based phylogenetic trees:
-
-* `nodeCount(Tree)`: Computes the total number of nodes.
-* `height(Tree)`: Computes the height of the tree (longest path from root to leaf).
-* `leafList(Tree)`: Returns a list of leaf node labels.
-
-Usage example:
-
-```python
-from Phylogenetic_Tree_Builder import nodeCount, height
-
-sample_tree = (
-    'A',
-    ('B', ('D', (), ()), ('E', (), ())),
-    ('C', ('F', (), ()), ('G', (), ()))
-)
-print(nodeCount(sample_tree))  # Total nodes
-print(height(sample_tree))     # Height of the tree
+# Numeric values represent heights/distances
+myTree = (5,                          # Root node with value 5
+          (3,                         # Left child with value 3
+           ("A", (), ()),             # Left leaf 'A'
+           ("B", (), ())              # Right leaf 'B'
+          ),
+          ("C", (), ())               # Right child (leaf) 'C'
+         )
 ```
 
 ---
 
-## Usage Tips
+### 🔍 3. `represent_trees.py`
+*Tree analysis and manipulation functions*
 
-* **Interactive Mode**: Many of these scripts are designed to be used in the Python shell or a Jupyter notebook. Import the specific functions you need.
-* **Turtle Graphics**: Ensure your environment supports a GUI display for `turtle`. On headless servers, use a local machine or configure a virtual display.
-* **Tree Format**: Trees are represented as nested tuples of the form `(value, left_subtree, right_subtree)`, where leaf nodes have empty subtrees: e.g., `('Leaf', (), ())`.
+Comprehensive utilities for working with tuple-based tree structures:
+
+| Function | Returns | Description |
+|----------|---------|-------------|
+| `nodeCount(Tree)` | `int` | Total number of nodes in the tree |
+| `height(Tree)` | `int` | Tree height (longest path from root to leaf) |
+| `leafList(Tree)` | `list` | List of all leaf node labels |
+
+**Example:**
+```python
+from represent_trees import nodeCount, height, leafList
+
+tree = ('A',
+        ('B', ('D', (), ()), ('E', (), ())),
+        ('C', ('F', (), ()), ('G', (), ()))
+       )
+
+print(f"Nodes: {nodeCount(tree)}")      # Output: 7
+print(f"Height: {height(tree)}")        # Output: 2
+print(f"Leaves: {leafList(tree)}")      # Output: ['D', 'E', 'F', 'G']
+```
 
 ---
 
-## Contributing
+### 🧮 4. `Phylogenetic_Tree_Builder.py`
+*Advanced tree operations and utilities*
 
-Thank you for your interest in improving **Phylogenetic Tree Utilities**! There are many ways to help:
+Extended functionality for tree manipulation and analysis:
 
-- 🐛 **Report bugs**: Include your OS, Python version, steps to reproduce, and a minimal snippet/tree that triggers the issue.
-- 💡 **Request features**: Describe the use‑case and, if possible, a small example tree or expected drawing.
-- 🧪 **Add tests**: Increase coverage of tree utilities and drawing logic.
-- 📝 **Improve docs**: Clarify function behavior, add examples, or fix typos.
-- 🧩 **Contribute code**: Small, focused PRs are easiest to review.
+| Function | Returns | Description |
+|----------|---------|-------------|
+| `leafCount(Tree)` | `int` | Count of leaf nodes |
+| `find(node, Tree)` | `bool` | Checks if node exists in tree |
+| `subtree(node, Tree)` | `tuple` | Subtree rooted at specified node |
+| `nodeList(Tree)` | `list` | All nodes (internal + leaves) |
+| `descendantNodes(node, Tree)` | `list` | All descendants of a node |
+| `parent(node, Tree)` | `str` or `None` | Parent of a node |
+| `scale(Tree, scaleFactor)` | `tuple` | New tree with scaled internal node values |
 
-### Development setup
+**Example:**
+```python
+from Phylogenetic_Tree_Builder import leafCount, find, subtree, parent, scale
 
-1) Ensure **Python 3.10+** is available.
-2) (Recommended) Create and activate a virtual environment:
-   ```bash
-   python3 -m venv .venv
-   source .venv/bin/activate  # Windows: .venv\Scripts\activate
-   python -m pip install --upgrade pip
-   ```
-3) *(Optional but encouraged)* Install developer tools:
-   ```bash
-   python -m pip install pytest black ruff mypy pre-commit
-   pre-commit install  # enables auto-format/lint on commit, if you add a .pre-commit-config.yaml
-   ```
+tree = ('A',
+        ('B', ('D', (), ()), ('E', (), ())),
+        ('C', (), ())
+       )
 
-### Running tests
+print(leafCount(tree))              # Output: 3
+print(find('D', tree))              # Output: True
+print(parent('D', tree))            # Output: 'B'
+print(descendantNodes('B', tree))   # Output: ['D', 'E']
 
-We use **pytest**:
+# Scale numeric tree values
+numeric_tree = (10, (5, (), ()), (3, (), ()))
+scaled = scale(numeric_tree, 2.0)   # Doubles internal node values
+```
+
+---
+
+## 💡 Usage Tips
+
+### 🌐 Interactive Mode
+These scripts work great in:
+- Python shell / REPL
+- Jupyter notebooks
+- IPython interactive sessions
+
+Just import the functions you need:
+```python
+from draw_trees import fractalTree
+from represent_trees import leafCount, height
+```
+
+### 🖥️ Turtle Graphics Requirements
+- Requires a **GUI display** for drawing
+- On headless servers: use a local machine or configure a virtual display (Xvfb)
+- Window stays open until you call `turtle.done()` or close it manually
+
+### 🌳 Tree Format Specification
+Trees are represented as nested tuples:
+```
+Tree = (value, left_subtree, right_subtree)
+```
+
+**Leaf node:** `('LeafName', (), ())`  
+**Internal node:** `('NodeName', left_tree, right_tree)`
+
+**Example:**
+```python
+# A simple binary tree
+simple_tree = ('Root',
+               ('Left', (), ()),
+               ('Right', (), ())
+              )
+```
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Here's how you can help:
+
+### 🐛 Report Bugs
+Found an issue? Open a bug report with:
+- 🖥️ **Environment** (OS, Python version)
+- 📝 **Steps to reproduce** (code/tree examples)
+- ✅ **Expected vs. actual behavior**
+- 🖼️ **Screenshots** (for drawing issues)
+
+### 💡 Request Features
+Have an idea? Describe:
+- 🎯 **Problem statement** / motivation
+- 🔧 **Proposed API** (function signature, behavior)
+- 📖 **Minimal example**
+
+### 🧪 Add Tests
+Help us improve test coverage:
 ```bash
+# Install test dependencies
+pip install pytest
+
+# Run tests
 pytest -q
 ```
 
-If you’re adding a new function (e.g., a new tree analysis helper), please include unit tests under a `tests/` directory. Example test shape:
-```python
-# tests/test_represent_trees.py
-from represent_trees import leafCount
+### 📝 Improve Documentation
+- Clarify function behavior
+- Add usage examples
+- Fix typos or improve explanations
 
-def test_leaf_count_simple():
-    t = ('A', ('B', (), ()), ('C', (), ()))
-    assert leafCount(t) == 2
+### 🧩 Contribute Code
+- Keep PRs **small and focused**
+- Follow **PEP 8** style guide
+- Include **docstrings** and **type hints**
+- Add **tests** for new functionality
+
+### 🔧 Development Setup
+
+```bash
+# 1. Clone repository
+git clone <repository-url>
+cd Phylogenetic_Tree_Builder
+
+# 2. Create virtual environment
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+
+# 3. Install dev tools (optional)
+pip install pytest black ruff mypy pre-commit
+pre-commit install
 ```
 
-### Coding style & quality
+### ✅ Pull Request Checklist
 
-- Follow **PEP 8** and include **type hints** where reasonable.
-- Keep functions **pure** where possible (no I/O in analysis utilities).
-- Prefer **docstrings** that explain arguments, return values, and edge cases.
-- Format with **black**, lint with **ruff**:
-  ```bash
-  ruff check .
-  black .
-  ```
-- If you modify public behavior, update examples in the README.
+- [ ] Tests pass (`pytest -q`)
+- [ ] Code follows PEP 8
+- [ ] Docstrings added/updated
+- [ ] Examples work correctly
+- [ ] Drawing demos run (`turtle.done()` included)
+- [ ] README updated if needed
 
-### Pull request guidelines
+---
 
-- Create a topic branch from `main` (e.g., `feature/scale-negative-heights` or `fix/parent-for-root`).
-- One logical change per PR. Keep diffs small and focused.
-- Ensure:
-  - [ ] `pytest` passes
-  - [ ] new/changed behavior is documented
-  - [ ] drawing demos still run (for `turtle` examples use `turtle.done()` to prevent premature close)
-- Link related issues and describe the approach and trade‑offs in the PR body.
+## 📄 License
 
-### Issue templates (suggested)
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
 
-When filing an issue, consider this structure:
+### Summary
+- ✅ Free to use, modify, and distribute
+- ✅ Include original copyright notice
+- ⚠️ Provided "as is" without warranty
 
-**Bug report**
-- Environment (OS, Python)
-- Steps to reproduce (code/tree)
-- Expected vs. actual behavior
-- Screenshots (for drawing issues)
+**Academic Use:** If you use this in research or academic work, a citation or link back to the repository is appreciated! 📚
 
-**Feature request**
-- Problem statement / motivation
-- Proposed API (function name, signature, brief behavior)
-- Minimal example
+---
 
+<div align="center">
 
+**Built with ❤️ for the computational biology community**
 
-## License
+*Happy tree building! 🌳✨*
 
-This project is released under the **MIT License**. See the `LICENSE` file in this repository for the full text.
+[⬆ Back to Top](#-phylogenetic-tree-utilities)
 
-**Summary (not a substitute for the license):**
-- You may use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of this software.
-- You must include the original copyright notice and the license in any substantial portions of the software.
-- The software is provided **“as is”**, without warranty of any kind. The authors are **not liable** for any claim, damages, or other liability arising from its use.
-
-If you distribute binaries or derivative works, please ensure a copy of the MIT license accompanies them. If you embed these utilities in academic work, a citation or link back to the repository is appreciated.
-
-
+</div>
