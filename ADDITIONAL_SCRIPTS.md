@@ -6,8 +6,10 @@ This document outlines useful scripts that could be added to enhance the Phyloge
 
 ## 🎯 High Priority Scripts
 
-### 1. **`draw_phylo_tree.py`** ⭐ *Complete Missing Function*
+### 1. **`draw_phylo_tree.py`** ✅ *IMPLEMENTED* ⭐
 **Purpose:** Implement the `drawPhyloTree()` function mentioned in `draw_trees.py` comments.
+
+**Status:** ✅ **COMPLETED** - Available in `draw_phylo_tree.py`
 
 **What it does:**
 - Draws phylogenetic trees using turtle graphics
@@ -67,8 +69,10 @@ turtle.done()
 
 ---
 
-### 2. **`tree_validator.py`** ✅ *Input Validation*
+### 2. **`tree_validator.py`** ✅ *IMPLEMENTED* *Input Validation*
 **Purpose:** Validate tree structures and provide helpful error messages.
+
+**Status:** ✅ **COMPLETED** - Available in `tree_validator.py`
 
 **Functions:**
 - `validate_tree(tree)` - Validates structure
@@ -678,9 +682,9 @@ Calculate various statistics about trees (branching factor, balance, etc.).
 ## 📋 Implementation Priority
 
 1. **High Priority (Do First):**
-   - `draw_phylo_tree.py` - Complete missing function
-   - `tree_validator.py` - Essential for robustness
-   - `tree_utils.py` - Useful extended operations
+   - ✅ `draw_phylo_tree.py` - **COMPLETED** - Complete missing function
+   - ✅ `tree_validator.py` - **COMPLETED** - Essential for robustness
+   - ⏳ `tree_utils.py` - Useful extended operations (pending)
 
 2. **Medium Priority (Nice to Have):**
    - `tree_generator.py` - Useful for testing

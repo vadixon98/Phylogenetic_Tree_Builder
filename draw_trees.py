@@ -102,6 +102,9 @@ def fractalTree(trunkLength):
 # you to use to compose a function called
 # drawPhyloTree(Tree), which will take a tree in
 # the form of a tuple as input.
+#
+# NOTE: This function has been implemented in draw_phylo_tree.py!
+# Import it with: from draw_phylo_tree import drawPhyloTree
 
 # Recall smallTree from Chap. 9 --
 # Tree structure: (node_name, left_subtree, right_subtree)
@@ -129,5 +132,14 @@ smallTree = ('A',                              # Root node 'A'
 
 # In the recursive case drawPhyloTree(tree)
 # should draw branches.
+#
+# IMPLEMENTATION NOTE:
+# The complete implementation is available in draw_phylo_tree.py
+# Example usage:
+#   import turtle
+#   from draw_phylo_tree import drawPhyloTree
+#   from draw_trees import smallTree
+#   drawPhyloTree(smallTree, branch_length=80, angle=45)
+#   turtle.done()
 
 

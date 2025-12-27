@@ -129,8 +129,10 @@ LEAF_LENGTH = 1
 
 ---
 
-### 5. **Implement Missing Function** 📝 *Medium Priority*
+### 5. **Implement Missing Function** ✅ *COMPLETED* 📝
 **Issue:** `drawPhyloTree(Tree)` is mentioned but not implemented.
+
+**Status:** ✅ **COMPLETED** - Available in `draw_phylo_tree.py`
 
 **Suggestion:** Complete the implementation as described in comments:
 ```python
@@ -154,7 +156,9 @@ def drawPhyloTree(Tree: Tree) -> None:
 
 ---
 
-### 6. **Add Tree Validation Utility** ✅ *Medium Priority*
+### 6. **Add Tree Validation Utility** ✅ *COMPLETED* *Medium Priority*
+**Status:** ✅ **COMPLETED** - Available in `tree_validator.py` with comprehensive validation functions
+
 Create a function to validate tree structures:
 ```python
 def validate_tree(tree: Tree, name: str = "Tree") -> bool:
@@ -478,18 +482,18 @@ __version__ = "0.1.0"
 ## 📊 Implementation Roadmap
 
 ### Phase 1: Foundation (Weeks 1-2)
-1. ✅ Add type hints to all functions
-2. ✅ Add error handling and validation
-3. ✅ Create test suite
-4. ✅ Fix naming conventions
-5. ✅ Add requirements files
+1. ⏳ Add type hints to all functions (partially done in new files)
+2. ✅ **COMPLETED** Add error handling and validation → `tree_validator.py`
+3. ⏳ Create test suite
+4. ⏳ Fix naming conventions
+5. ⏳ Add requirements files
 
 ### Phase 2: Quality (Weeks 3-4)
-1. ✅ Reorganize code structure
-2. ✅ Add comprehensive documentation
-3. ✅ Implement missing `drawPhyloTree`
-4. ✅ Add logging support
-5. ✅ Create examples
+1. ⏳ Reorganize code structure
+2. ✅ Add comprehensive documentation (README updated)
+3. ✅ **COMPLETED** Implement missing `drawPhyloTree` → `draw_phylo_tree.py`
+4. ⏳ Add logging support
+5. ⏳ Create examples
 
 ### Phase 3: Enhancement (Weeks 5-6)
 1. ✅ Add new tree operations
