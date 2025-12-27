@@ -20,6 +20,12 @@
 - [🚀 Quick Start](#-quick-start)
 - [📦 Installation](#-installation)
 - [📚 Scripts Overview](#-scripts-overview)
+  - [1. draw_trees.py](#-1-draw_treespy)
+  - [2. DrawTrees2.py](#-2-drawtrees2py)
+  - [3. draw_phylo_tree.py](#-3-draw_phylo_treepy--new)
+  - [4. represent_trees.py](#-4-represent_treespy)
+  - [5. Phylogenetic_Tree_Builder.py](#-5-phylogenetic_tree_builderpy)
+  - [6. tree_validator.py](#-6-tree_validatorpy--new)
 - [💡 Usage Tips](#-usage-tips)
 - [🔮 Roadmap & Improvements](#-roadmap--improvements)
 - [🤝 Contributing](#-contributing)
@@ -30,8 +36,12 @@
 ## ✨ Features
 
 - 🎨 **Visual Tree Drawing** - Draw phylogenetic trees with the `turtle` graphics library
+  - Basic fractal trees and shapes
+  - Complete `drawPhyloTree()` implementation with leaf labels
+  - Advanced scaled tree drawing with configurable branch lengths
 - 🔄 **Recursive Structures** - Elegant tuple-based tree representations
 - 📊 **Tree Analysis** - Comprehensive utilities for counting nodes, finding parents, and more
+- ✅ **Tree Validation** - Robust validation functions with helpful error messages and suggestions
 - 🌿 **Fractal Trees** - Create beautiful fractal-style tree visualizations
 - ⚙️ **Scalable Drawing** - Support for scaled trees with configurable branch lengths
 - 🧮 **Tree Metrics** - Calculate height, count leaves, and traverse trees recursively
@@ -60,6 +70,16 @@ print(f"Nodes: {nodeCount(tree)}")      # Output: 3
 print(f"Leaves: {leafCount(tree)}")     # Output: 2
 print(f"Height: {height(tree)}")        # Output: 1
 print(f"Leaf names: {leafList(tree)}")  # Output: ['B', 'C']
+```
+
+```python
+# Validate and get tree information
+from tree_validator import is_valid_tree, get_tree_structure_info
+
+tree = ('A', ('B', (), ()), ('C', (), ()))
+if is_valid_tree(tree):
+    info = get_tree_structure_info(tree)
+    print(f"Valid tree with {info['nodes']} nodes!")
 ```
 
 ---
@@ -168,7 +188,36 @@ myTree = (5,                          # Root node with value 5
 
 ---
 
-### 🔍 3. `represent_trees.py`
+### 🎯 3. `draw_phylo_tree.py` ⭐ *NEW*
+*Complete implementation of drawPhyloTree function*
+
+Implements the `drawPhyloTree()` function mentioned in `draw_trees.py` comments. Draws phylogenetic trees with leaf names only:
+
+| Function | Description |
+|----------|-------------|
+| `drawPhyloTree(Tree, branch_length, angle)` | Draws trees, writing only leaf node names |
+| `drawPhyloTree_with_labels(Tree, branch_length, angle, show_internal)` | Extended version with optional internal node labels |
+
+**Example:**
+```python
+import turtle
+from draw_phylo_tree import drawPhyloTree
+from represent_trees import smallTree
+
+turtle.speed(3)
+drawPhyloTree(smallTree, branch_length=80, angle=45)
+turtle.done()
+```
+
+**Key Features:**
+- ✨ Writes only leaf node names (not internal nodes)
+- 🎨 Configurable branch length and angle
+- 📉 Natural tapering effect as branches get shorter
+- 🔄 Recursive drawing algorithm
+
+---
+
+### 🔍 4. `represent_trees.py`
 *Tree analysis and manipulation functions*
 
 Comprehensive utilities for working with tuple-based tree structures:
@@ -184,9 +233,9 @@ Comprehensive utilities for working with tuple-based tree structures:
 from represent_trees import nodeCount, height, leafList
 
 tree = ('A',
-        ('B', ('D', (), ()), ('E', (), ())),
-        ('C', ('F', (), ()), ('G', (), ()))
-       )
+    ('B', ('D', (), ()), ('E', (), ())),
+    ('C', ('F', (), ()), ('G', (), ()))
+)
 
 print(f"Nodes: {nodeCount(tree)}")      # Output: 7
 print(f"Height: {height(tree)}")        # Output: 2
@@ -195,7 +244,7 @@ print(f"Leaves: {leafList(tree)}")      # Output: ['D', 'E', 'F', 'G']
 
 ---
 
-### 🧮 4. `Phylogenetic_Tree_Builder.py`
+### 🧮 5. `Phylogenetic_Tree_Builder.py`
 *Advanced tree operations and utilities*
 
 Extended functionality for tree manipulation and analysis:
@@ -231,6 +280,48 @@ scaled = scale(numeric_tree, 2.0)   # Doubles internal node values
 
 ---
 
+### ✅ 6. `tree_validator.py` ⭐ *NEW*
+*Tree validation and error checking utilities*
+
+Provides robust validation functions to check tree structures and provide helpful error messages:
+
+| Function | Returns | Description |
+|----------|---------|-------------|
+| `validate_tree(tree, name)` | `bool` | Validates structure, raises descriptive errors |
+| `is_valid_tree(tree)` | `bool` | Returns True/False without exceptions |
+| `get_tree_structure_info(tree)` | `dict` | Returns detailed tree metrics and validation status |
+| `find_tree_issues(tree)` | `list` | Returns list of all issues found |
+| `validate_tree_with_suggestions(tree)` | `dict` | Validates and provides fix suggestions |
+
+**Example:**
+```python
+from tree_validator import validate_tree, is_valid_tree, get_tree_structure_info
+
+# Validate a tree
+tree = ('A', ('B', (), ()), ('C', (), ()))
+
+if is_valid_tree(tree):
+    info = get_tree_structure_info(tree)
+    print(f"Nodes: {info['nodes']}")      # Output: 3
+    print(f"Height: {info['height']}")    # Output: 1
+    print(f"Leaves: {info['leaves']}")    # Output: 2
+    print(f"Leaf names: {info['leaf_names']}")  # Output: ['B', 'C']
+
+# Check invalid tree
+invalid = ['A', 'B', 'C']
+if not is_valid_tree(invalid):
+    print("Invalid tree structure detected!")
+```
+
+**Key Features:**
+- 🛡️ Comprehensive structure validation
+- 📋 Detailed error messages with context
+- 💡 Helpful suggestions for fixing common issues
+- 📊 Tree metrics and information gathering
+- 🔍 Recursive validation of all subtrees
+
+---
+
 ## 🔮 Roadmap & Improvements
 
 We're continuously working to improve this project! Check out our [**SUGGESTIONS.md**](SUGGESTIONS.md) document for:
@@ -240,13 +331,20 @@ We're continuously working to improve this project! Check out our [**SUGGESTIONS
 - 💡 **Implementation examples** - Code snippets for improvements
 - 🚀 **Quick wins** - Things you can do today
 
+### Recent Additions ✨
+
+- ✅ **`draw_phylo_tree.py`** - Complete implementation of missing `drawPhyloTree()` function
+- ✅ **`tree_validator.py`** - Comprehensive tree validation and error checking utilities
+
 ### Current Focus Areas
 
 - ⚡ **Type hints** - Adding type annotations for better IDE support
-- 🛡️ **Error handling** - Robust input validation and clear error messages
+- 🛡️ **Error handling** - Robust input validation and clear error messages (✅ tree_validator.py added!)
 - 🧪 **Testing** - Building a comprehensive test suite
 - 📚 **Documentation** - Enhanced examples and API docs
 - 🔧 **Code organization** - Better module structure
+
+**Looking for more ideas?** Check out [**ADDITIONAL_SCRIPTS.md**](ADDITIONAL_SCRIPTS.md) for more script suggestions!
 
 Have ideas? Feel free to [open an issue](https://github.com/yourusername/Phylogenetic_Tree_Builder/issues) or contribute!
 
