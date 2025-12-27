@@ -21,6 +21,7 @@
 - [📦 Installation](#-installation)
 - [📚 Scripts Overview](#-scripts-overview)
 - [💡 Usage Tips](#-usage-tips)
+- [🔮 Roadmap & Improvements](#-roadmap--improvements)
 - [🤝 Contributing](#-contributing)
 - [📄 License](#-license)
 
@@ -51,12 +52,14 @@ turtle.done()
 
 ```python
 # Analyze a phylogenetic tree
-from represent_trees import leafCount, height, leafList
+from represent_trees import nodeCount, height, leafList
+from Phylogenetic_Tree_Builder import leafCount
 
 tree = ('A', ('B', (), ()), ('C', (), ()))
-print(f"Leaves: {leafCount(tree)}")
-print(f"Height: {height(tree)}")
-print(f"Leaf names: {leafList(tree)}")
+print(f"Nodes: {nodeCount(tree)}")      # Output: 3
+print(f"Leaves: {leafCount(tree)}")     # Output: 2
+print(f"Height: {height(tree)}")        # Output: 1
+print(f"Leaf names: {leafList(tree)}")  # Output: ['B', 'C']
 ```
 
 ---
@@ -151,6 +154,7 @@ turtle.done()
 **Tree Format:**
 ```python
 # Numeric values represent heights/distances
+# Internal nodes have numeric values, leaves have string names
 myTree = (5,                          # Root node with value 5
           (3,                         # Left child with value 3
            ("A", (), ()),             # Left leaf 'A'
@@ -159,6 +163,8 @@ myTree = (5,                          # Root node with value 5
           ("C", (), ())               # Right child (leaf) 'C'
          )
 ```
+
+**Note:** The `myTree` example is already defined in `DrawTrees2.py`, so you can import and use it directly!
 
 ---
 
@@ -225,6 +231,27 @@ scaled = scale(numeric_tree, 2.0)   # Doubles internal node values
 
 ---
 
+## 🔮 Roadmap & Improvements
+
+We're continuously working to improve this project! Check out our [**SUGGESTIONS.md**](SUGGESTIONS.md) document for:
+
+- 📋 **Comprehensive improvement suggestions** - 20+ detailed recommendations
+- 🎯 **Priority-based roadmap** - What to tackle first
+- 💡 **Implementation examples** - Code snippets for improvements
+- 🚀 **Quick wins** - Things you can do today
+
+### Current Focus Areas
+
+- ⚡ **Type hints** - Adding type annotations for better IDE support
+- 🛡️ **Error handling** - Robust input validation and clear error messages
+- 🧪 **Testing** - Building a comprehensive test suite
+- 📚 **Documentation** - Enhanced examples and API docs
+- 🔧 **Code organization** - Better module structure
+
+Have ideas? Feel free to [open an issue](https://github.com/yourusername/Phylogenetic_Tree_Builder/issues) or contribute!
+
+---
+
 ## 💡 Usage Tips
 
 ### 🌐 Interactive Mode
@@ -243,6 +270,10 @@ from represent_trees import leafCount, height
 - Requires a **GUI display** for drawing
 - On headless servers: use a local machine or configure a virtual display (Xvfb)
 - Window stays open until you call `turtle.done()` or close it manually
+- **Important:** Restart your Python shell after each turtle drawing session for best results
+
+### 🔄 Function Naming Note
+Note that `leafCount` is available in `Phylogenetic_Tree_Builder.py` (with additional tree operations), while `nodeCount` and `height` are in `represent_trees.py`. Both modules complement each other!
 
 ### 🌳 Tree Format Specification
 Trees are represented as nested tuples:
@@ -267,6 +298,8 @@ simple_tree = ('Root',
 ## 🤝 Contributing
 
 We welcome contributions! Here's how you can help:
+
+> 💡 **New to contributing?** Check out our [SUGGESTIONS.md](SUGGESTIONS.md) for ideas on what to work on, including quick wins that can be done in just a few hours!
 
 ### 🐛 Report Bugs
 Found an issue? Open a bug report with:
@@ -299,8 +332,9 @@ pytest -q
 ### 🧩 Contribute Code
 - Keep PRs **small and focused**
 - Follow **PEP 8** style guide
-- Include **docstrings** and **type hints**
+- Include **docstrings** and **type hints** (see [SUGGESTIONS.md](SUGGESTIONS.md) for examples)
 - Add **tests** for new functionality
+- Check our [roadmap](#-roadmap--improvements) for high-priority items
 
 ### 🔧 Development Setup
 
@@ -320,18 +354,22 @@ pre-commit install
 
 ### ✅ Pull Request Checklist
 
-- [ ] Tests pass (`pytest -q`)
-- [ ] Code follows PEP 8
-- [ ] Docstrings added/updated
+- [ ] Tests pass (`pytest -q`) - Add tests for new features!
+- [ ] Code follows PEP 8 style guide
+- [ ] Docstrings added/updated with clear descriptions
+- [ ] Type hints added (if applicable)
 - [ ] Examples work correctly
 - [ ] Drawing demos run (`turtle.done()` included)
 - [ ] README updated if needed
+- [ ] No linter errors (run `ruff check .` if available)
 
 ---
 
 ## 📄 License
 
-This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the **MIT License**.
+
+> ⚠️ **Note:** If a LICENSE file is not present in the repository, please create one with the MIT License text. See [SUGGESTIONS.md](SUGGESTIONS.md) for details.
 
 ### Summary
 - ✅ Free to use, modify, and distribute
@@ -339,6 +377,14 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 - ⚠️ Provided "as is" without warranty
 
 **Academic Use:** If you use this in research or academic work, a citation or link back to the repository is appreciated! 📚
+
+---
+
+## 📚 Additional Resources
+
+- 📖 **[SUGGESTIONS.md](SUGGESTIONS.md)** - Detailed improvement suggestions and roadmap
+- 🐛 **[Report Issues](https://github.com/yourusername/Phylogenetic_Tree_Builder/issues)** - Found a bug? Let us know!
+- 💬 **[Discussions](https://github.com/yourusername/Phylogenetic_Tree_Builder/discussions)** - Questions or ideas? Start a discussion!
 
 ---
 
